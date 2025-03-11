@@ -1,0 +1,54 @@
+<!-- Citation for the following code: -->
+<!-- Date: 12/09/2024 -->
+<!-- Adapted and based on: -->
+<!-- Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app?tab=readme-ov-file#step-5---connecting-the-database -->
+<!-- Source URL: https://jinja.palletsprojects.com/en/stable/templates/ -->
+<!-- Source URL: https://getbootstrap.com/docs/5.3/getting-started/introduction/ -->
+<!-- Source URL: https://www.w3schools.com/html/html_basic.asp -->
+<!-- Source URL: https://www.w3schools.com/css/default.asp -->
+
+{% extends "main.jinja" %}
+{% block content %}
+
+<!-- Edit bottle order form -->
+<h2>Edit Bottle Order</h2>
+
+<form action="{{ url_for('edit_bottle_orders', bottle_orderID=bottleorder['bottle_orderID']) }}" method="POST">
+
+    <input type="hidden" name="bottle_orderID" value="{{ bottleorder['bottle_orderID'] }}">
+
+    <!-- Order id dropdown -->
+    <label for="order_id">Order ID:</label>
+    <select name="order_id" required>
+        <option value="">Select Order</option>
+        {% for order in orders %}
+            <option value="{{ order['order_id'] }}" 
+                {% if order['order_id'] == bottleorder['order_id'] %}selected{% endif %}>
+                {{ order['order_id'] }}
+            </option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <!-- Displays bottle name -->
+    <label for="bottle_id">Bottle:</label>
+    <select name="bottle_id" required>
+        <option value="">Select Bottle</option>
+        {% for bottle in bottles %}
+            <option value="{{ bottle['bottle_id'] }}" 
+                {% if bottle['bottle_id'] == bottleorder['bottle_id'] %}selected{% endif %}>
+                {{ bottle['bottle_name'] }}
+            </option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <label for="order_qty">Quantity:</label>
+    <input type="number" name="order_qty" value="{{ bottleorder['order_qty'] }}" required>
+    <br><br>
+
+    <!-- Edit BottleOrder button -->
+    <button type="submit" name="edit_bottle_order" class="btn btn-dark">Update Bottle Order</button>
+</form>
+
+{% endblock %}

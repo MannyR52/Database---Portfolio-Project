@@ -1,0 +1,35 @@
+<!-- Citation for the following code: -->
+<!-- Date: 12/09/2024 -->
+<!-- Adapted and based on: -->
+<!-- Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app?tab=readme-ov-file#step-5---connecting-the-database -->
+<!-- Source URL: https://jinja.palletsprojects.com/en/stable/templates/ -->
+<!-- Source URL: https://getbootstrap.com/docs/5.3/getting-started/introduction/ -->
+<!-- Source URL: https://www.w3schools.com/html/html_basic.asp -->
+<!-- Source URL: https://www.w3schools.com/css/default.asp -->
+
+{% extends "main.jinja" %}
+{% block content %}
+
+<!-- Edit Customer Form -->
+<h2>Edit Customer</h2>
+
+<form method="POST">
+    <input type="hidden" name="customer_id" value="{{ customers['customer_id'] }}">
+
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="{{ customers['name'] }}" required><br><br>
+
+    <label for="phone_num">Phone Number:</label>
+    <input type="text" name="phone_num" value="{{ customers['phone_num'] }}" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" value="{{ customers['email'] }}"><br><br>
+
+    <label for="visit_frequency_monthly">Visit Frequency (Monthly):</label>
+    <input type="number" name="visit_frequency_monthly" value="{{ customers['visit_frequency_monthly'] }}"><br><br>
+
+    <!-- Edit Customer button -->
+    <button type="submit" name="edit_customers" class="btn btn-dark">Update Customer</button>
+</form>
+
+{% endblock %}

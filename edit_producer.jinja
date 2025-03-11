@@ -1,0 +1,36 @@
+<!-- Citation for the following code: -->
+<!-- Date: 12/09/2024 -->
+<!-- Adapted and based on: -->
+<!-- Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app?tab=readme-ov-file#step-5---connecting-the-database -->
+<!-- Source URL: https://jinja.palletsprojects.com/en/stable/templates/ -->
+<!-- Source URL: https://getbootstrap.com/docs/5.3/getting-started/introduction/ -->
+<!-- Source URL: https://www.w3schools.com/html/html_basic.asp -->
+<!-- Source URL: https://www.w3schools.com/css/default.asp -->
+
+{% extends "main.jinja" %}
+{% block content %}
+
+<!-- Edit Producer Form -->
+<h2>Edit Producer</h2>
+
+<form action="{{ url_for('edit_producer', producer_id=producers['producer_id']) }}" method="POST">
+
+    <!-- Hidden input to keep track of the producer_id -->
+    <input type="hidden" name="producer_id" value="{{ producers['producer_id'] }}">
+
+    <label for="producer_name">Producer Name:</label>
+    <input type="text" id="producer_name" name="producer_name" value="{{ producers['producer_name'] }}" required>
+    <br><br>
+
+    <label for="region">Region:</label>
+    <input type="text" id="region" name="region" value="{{ producers['region'] }}" required>
+    <br><br>
+
+    <label for="region_details">Region Details:</label>
+    <textarea id="region_details" name="region_details" required>{{ producers['region_details'] }}</textarea>
+    <br><br>
+
+    <!-- Edit Producer button -->
+    <button type="submit" name="edit_producer" class="btn btn-dark">Update Producer</button>
+</form>
+{% endblock %}

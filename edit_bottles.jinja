@@ -1,0 +1,50 @@
+<!-- Citation for the following code: -->
+<!-- Date: 12/09/2024 -->
+<!-- Adapted and based on: -->
+<!-- Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app?tab=readme-ov-file#step-5---connecting-the-database -->
+<!-- Source URL: https://jinja.palletsprojects.com/en/stable/templates/ -->
+<!-- Source URL: https://getbootstrap.com/docs/5.3/getting-started/introduction/ -->
+<!-- Source URL: https://www.w3schools.com/html/html_basic.asp -->
+<!-- Source URL: https://www.w3schools.com/css/default.asp -->
+
+{% extends "main.jinja" %}
+{% block content %}
+
+<!-- Edit Bottle Form -->
+<h2>Edit Bottle</h2>
+<form method="POST">
+    <input type="hidden" name="bottle_id" value="{{ bottles['bottle_id'] }}">
+
+    <label for="bottle_name">Name:</label>
+    <input type="text" name="bottle_name" value="{{ bottles['bottle_name'] }}" required><br><br>
+
+    <label for="type">Wine Type:</label>
+    <input type="text" name="type" value="{{ bottles['type'] }}" required><br><br>
+
+    <label for="volume">Volume (mL):</label>
+    <input type="text" name="volume" value="{{ bottles['volume'] }}" required><br><br>
+
+    <label for="production_yr">Year Produced:</label>
+    <input type="text" name="production_yr" value="{{ bottles['production_yr'] }} required"><br><br>
+
+    <label for="alc_percent">% Alcohol:</label>
+    <input type="text" name="alc_percent" value="{{ bottles['alc_percent'] }}" required><br><br>
+
+    <label for="price">Price:</label>
+    <input type="text" name="price" value="{{ bottles['price'] }}" required><br><br>
+
+    <!-- Creates producer dropdown -->
+    <label for="producer_id">Producer:</label>
+    <select id="producer_id" name="producer_id" required>
+        <option value="">Select Producer</option>
+        {% for producer in producers %}
+            <option value="{{ producer['producer_id'] }}" {% if producer['producer_id'] == bottles['producer_id'] %}selected{% endif %}>{{ producer['producer_name'] }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <!-- Edit Bottle button -->
+    <button type="submit" name="edit_bottles" class="btn btn-dark">Update Bottle</button>
+</form>
+
+{% endblock %}
